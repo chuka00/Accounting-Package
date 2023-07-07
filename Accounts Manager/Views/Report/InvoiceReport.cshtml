@@ -1,0 +1,42 @@
+﻿@{
+}
+
+@model List<Invoice>
+
+<!-- Display the invoice report -->
+<h2>Invoice Report</h2>
+<tableclass="table">
+    <thead>
+        <tr>
+            <th>Invoice Number</th>
+            <th>Invoice Date</th>
+            <th>Due Date</th>
+            <th>Total Amount</th>
+            <th>Paid Amount</th>
+            <th>Payment Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Render the rows for each invoice -->
+        @foreach (var invoice in Model)
+        {
+                <tr>
+                    <td>@invoice.InvoiceNumber</td>
+                    <td>@invoice.InvoiceDate.ToShortDateString()</td>
+                    <td>@invoice.DueDate.ToShortDateString()</td>
+                    <td>@invoice.TotalAmount.ToString("C")</td>
+                    <td>@invoice.PaidAmount.ToString("C")</td>
+                    <td>
+                    @if (invoice.IsPaid)
+                    {
+                                <span class="text-success">Paid</span>
+                    }
+                    else
+                    {
+                                <span class="text-danger">Unpaid</span>
+                    }
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

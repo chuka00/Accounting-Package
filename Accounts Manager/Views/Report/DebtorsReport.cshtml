@@ -1,0 +1,25 @@
+﻿@model Accounts_Manager.Models.DebtReportItemViewModel
+
+@{
+}
+
+<!-- Display the debtors report -->
+<h2>Debtors Report</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Total Debt</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Render the rows for each customer -->
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.TotalDebt.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
