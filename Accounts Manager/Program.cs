@@ -18,9 +18,14 @@ namespace Accounts_Manager
             /*builder.Services.AddDbContext<ApplicationDbContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")));*/
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")));
-
-            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();//todo: show other life-cycles
+            
+            // Register services
+            builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<ReportService>();
             builder.Services.AddScoped<CustomerService>();
+            builder.Services.AddScoped<InvoiceService>();
+
 
 
 

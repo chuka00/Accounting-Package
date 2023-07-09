@@ -1,0 +1,60 @@
+﻿@model Accounts_Manager.Models.InvoiceViewModel
+
+<!-- Form for creating a new invoice -->
+<form method="post" action="/Invoice/Create">
+    <!-- Add form fields for the invoice properties -->
+    <div class="form-group">
+        <label for="customerId">Customer:</label>
+        <select id="customerId" name="CustomerId" class="form-control" required>
+            <option value="">Select Customer</option>
+            <!-- Render the list of customers as options -->
+            @foreach (var customer in ViewBag.Customers)
+            {
+                <option value="@customer.Id">@customer.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="invoiceDate">Invoice Date:</label>
+        <input id="invoiceDate" name="InvoiceDate" type="date" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="dueDate">Due Date:</label>
+        <input id="dueDate" name="DueDate" type="date" class="form-control" required>
+    </div>
+
+    <!-- Add form fields for the line items -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Render the line item rows -->
+            @for (int i = 0; i < Model.LineItems.Count; i++)
+            {
+                <tr>
+                    <td><input name="LineItems[@i].Description" class="form-control" required></td>
+                    <td><input name="LineItems[@i].Quantity" type="number" step="any" class="form-control" required></td>
+                    <td><input name="LineItems[@i].UnitPrice" type="number" step="any" class="form-control" required></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-primary" onclick="addLineItem()">Add Line Item</button>
+    <button type="submit" class="btn btn-primary">Create Invoice</button>
+</form>
+
+<script>
+    function addLineItem() {
+        // Clone the last line item row and append it to the table
+        var lastRow = $('table tbody tr:last');
+        var newRow = lastRow.clone();
+        newRow.find('input').val('');
+        $('table tbody').append(newRow);
+    }
+</script>

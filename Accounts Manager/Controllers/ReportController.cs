@@ -18,20 +18,7 @@ namespace Accounts_Manager.Controllers
             return View();
         }
 
-        /*public IActionResult DebtsReport(DateTime startDate, DateTime endDate)
-        {
-            var debts = _context.Invoices
-                .Where(i => i.InvoiceDate >= startDate && i.InvoiceDate <= endDate)
-                .GroupBy(i => i.CustomerId)
-                .Select(g => new DebtReportItem
-                {
-                    CustomerName = g.First().Customer.Name,
-                    TotalDebt = g.Sum(i => i.TotalAmount - i.PaidAmount)
-                })
-                .ToList();
-
-            return View(debts);
-        }*/
+       
         public IActionResult DebtsReport(DateTime startDate, DateTime endDate)
         {
             var debts = _context.Invoices
@@ -57,14 +44,7 @@ namespace Accounts_Manager.Controllers
         }
 
 
-        /* public IActionResult DebtorsReport()
-         {
-             var debtors = _context.Customers
-                 .Where(c => c.Invoices.Any(i => i.TotalAmount > i.PaidAmount))
-                 .ToList();
-
-             return View(debtors);
-         }*/
+       
 
         public IActionResult InvoiceReport(int invoiceId)
         {

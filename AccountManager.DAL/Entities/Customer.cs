@@ -15,6 +15,11 @@ namespace AccountManager.DAL.Entities
         public string Address { get; set; }
 
         public ICollection<Invoice> Invoices { get; set; }
+
+        public decimal TotalDebt
+        {
+            get { return Invoices.Sum(i => i.TotalAmount - i.PaidAmount); }
+        }
     }
 
 }
